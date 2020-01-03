@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.yr.dao.UserDao">
+	<resultMap type="User" id="UserResult">
+		<result column="id" property="id" />
+		<result column="name" property="name" />
+		<result column="addr" property="addr" />
+		<result column="age" property="age" />
+	</resultMap>
+
+	<!-- 查询所有部门 -->
+	<select id="queryAll" resultMap="UserResult">
+		select * from user
+	</select>
+
+
+	<!-- 添加部门 -->
+	<insert id="add" parameterType="User">
+		insert into
+		user(name,addr,age)values(#{name},#{addr},#{age})
+	</insert>
+
+	<!-- 删除部门 -->
+	<delete id="delete" parameterType="int">
+		delete from user
+		<where>
+			id = #{id}
+		</where>
+	</delete>
+
+	<!-- 根据id查询回显数据 -->
+	<select id="query" parameterType="int" resultMap="UserResult">
+		select
+		* from user where id = #{id}
+	</select>
+
+	<!-- 修改部门 -->
+	<update id="update" parameterType="User">
+		update user set
+		name=#{name},addr=#{addr},age=#{age} where id = #{id}
+	</update>
+
+</mapper>
